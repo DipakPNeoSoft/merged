@@ -2,14 +2,14 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios' 
 import '../post.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {  Link } from 'react-router-dom'
+import {  Link, useNavigate } from 'react-router-dom'
 
 
 
 
 function Post() {
     const [posts,setData] = useState([])
-    const [post,setPost] = useState({ title: '', content:''})
+    const navigate = useNavigate()
     
 
     useEffect(() => {
@@ -21,7 +21,12 @@ function Post() {
                 
                 console.log("data",res.data)
             })
-            .catch("error occured")
+            .catch((err)=>{
+                if(err.response.status === 401){
+                    navigate('/')
+                }
+                console.log("error occured in post",err.response.status)
+            })
      
     },[])
 
@@ -31,30 +36,33 @@ function Post() {
         { Authorization: `${localStorage.getItem('token')}` 
         }})
         .then(res=> {
-               
+            setData(res.data)
            
         })
         .catch("error occured")
     }
 
-    const handleInputChange = (event) => {
-        console.log("inside Change")
-        setPost({ ...post, [event.target.name]: event.target.value });
-        
-      };
-
-   const handleSubmit = () => {
-      
-        axios.post(`http://localhost:3002/api/v1/posts/`,{post},{ headers: 
+    const handleLogout = ()=> {
+        axios.delete(`http://localhost:3002//users/sign_out`,{ headers: 
         { Authorization: `${localStorage.getItem('token')}` 
         }})
         .then(res=> {
-            
+            debugger
+            if(res.status === 200){
+                localStorage.clear(); 
+                navigate('/')
+            }
             setData(res.data)
+           
         })
-        .catch("error occured")
+        .catch((err)=>{
+            console.log("error ",err)
+        })
+        
+       
+    }
 
-   }
+    
    
    
     
@@ -62,23 +70,12 @@ function Post() {
     
     <div>
         <div>
-            <h1>Create Posts</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>title</label>
-                    <input name="title" value={post.title} onChange={handleInputChange} />
-                </div>
-                <div>
-                    <label>Content</label>
-                    <input name="content" value={post.content} onChange={handleInputChange}  />
-
-                </div>
-                <button>Create Posts</button>
-               
-
-            </form>
-       
+            <Link to={`/new`}  >New</Link>
         </div>
+        <div>
+            <a href="#" onClick={handleLogout}>Logout</a>
+        </div>
+        
         <h1>Posts</h1>
         {
             posts.map(post=> 
@@ -88,6 +85,8 @@ function Post() {
                 <p >{post.title}</p>
                 <span><Link to={`/posts/${post.id}`} className='btn btn-info' id={post.id} >Show</Link></span>
                 <span><button  className='btn btn-danger' id={post.id}  onClick={deletePost}>Delete</button></span>
+                <span><Link to={`/posts/${post.id}/edit`} className='btn btn-info' id={post.id} >Edit</Link></span>
+
 
                 
             </div>)

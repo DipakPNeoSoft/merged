@@ -2,21 +2,34 @@ import './App.css';
 import Login from './components/Login';
 import Post from './components/Post';
 import Show from './components/Show';
-import { BrowserRouter , Route,Switch } from 'react-router-dom';
+import New from './components/New';
+import { Routes, BrowserRouter, Route } from "react-router-dom";
+import Edit from './components/Edit';
 
 function App() {
   return (
     
-    <BrowserRouter>
-    <Switch>
-     <Route path="/posts/:id" component={Show} />
 
-   
-      <Route path="/posts" component={Post} />
-      <Route path="/" component={Login} />
+    <BrowserRouter> 
+
+      <Routes>
+        <Route path="/new" element={<New/>} />
+
+        <Route path="/posts/:id" element={<Show/>} />
+        <Route exac path="/posts/:id/edit" element={<Edit/>} />
+
+
+        <Route path="/posts" element={<Post/>} />
+        <Route path="/" element={<Login/>} />
+
+      </Routes>
      
-    </Switch>
+     
     </BrowserRouter>
+    
+      
+   
+    
  
   );
 }
