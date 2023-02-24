@@ -10,7 +10,7 @@ function Edit() {
     const {id}= useParams()
     const [post,setData] = useState({title: '',content: ''})
     useEffect(() => {
-        axios.get(`http://localhost:3002/api/v1/posts/${id}`,{ headers: 
+        axios.get(`http://localhost:3001/api/v1/posts/${id}`,{ headers: 
         { Authorization: `${localStorage.getItem('token')}` 
         }}).then(res=> {
                

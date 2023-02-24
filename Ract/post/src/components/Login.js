@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import '../login.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -28,7 +28,7 @@ function Login() {
 
     // console.log(this.state)
 
-    axios.post('http://localhost:3002/users/sign_in', { user })
+    axios.post('http://localhost:3001/users/sign_in', { user })
       .then(response => {
         console.log("response",response)
         console.log("status",response.status)
@@ -80,6 +80,9 @@ function Login() {
                     </div>
                   </form>
                   <span>{error}</span>
+                  <div className="mb-4">
+                      <Link to={'/register'}>Register</Link>
+                  </div>
 
                 </div>
               </div>

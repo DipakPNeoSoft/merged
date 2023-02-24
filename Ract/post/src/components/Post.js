@@ -13,7 +13,7 @@ function Post() {
     
 
     useEffect(() => {
-        axios.get('http://localhost:3002/api/v1/posts',{ headers: 
+        axios.get('http://localhost:3001/api/v1/posts',{ headers: 
         { Authorization: `${localStorage.getItem('token')}` 
         }}).then(res=> {
                 console.log(res)

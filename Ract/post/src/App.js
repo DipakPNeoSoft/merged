@@ -5,6 +5,7 @@ import Show from './components/Show';
 import New from './components/New';
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import Edit from './components/Edit';
+import Registration from './components/Registration';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/posts/:id" element={<Show/>} />
         <Route exac path="/posts/:id/edit" element={<Edit/>} />
 
+        <Route path="/register" element={<Registration/>} />
 
         <Route path="/posts" element={<Post/>} />
         <Route path="/" element={<Login/>} />

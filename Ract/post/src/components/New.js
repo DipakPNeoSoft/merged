@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import axios from 'axios' 
+import React, { useState } from 'react'
+import axios from 'axios'
 
 import { useNavigate } from 'react-router-dom';
 
@@ -10,39 +10,54 @@ import { useNavigate } from 'react-router-dom';
 
 function New() {
     const navigate = useNavigate();
-    const [post, setPost] = useState({ title: '', content: '' })
+    const [post, setPost] = useState({ title: '', content: '', image: '' })
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (e) => {
         console.log("inside Change")
-        setPost({ ...post, [event.target.name]: event.target.value });
+        // setPost({ ...post, [event.target.name]: event.target.value });
+        const { name, value, files } = e.target;
+        if (name === 'images') {
+            setPost({
+                ...post,
+                images: files
+            });
+        } else {
+            setPost({
+                ...post,
+                [name]: value
+            });
+        }
 
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("inside submit")
-        debugger
-        axios.post(`http://localhost:3002/api/v1/posts/`, { post }, {
+        const formData = new FormData();
+        formData.append('post[title]', post.title);
+        formData.append('post[content]', post.content);
+        formData.append('post[images][]', post.images[0]); 
+        axios.post(`http://localhost:3001/api/v1/posts/`, formData, {
             headers:
             {
                 Authorization: `${localStorage.getItem('token')}`
             }
-            })
+        })
             .then(res => {
-                console.log("response",res)
+                console.log("response", res)
                 navigate("/posts")
-                
 
-                
-               
+
+
+
             }).catch(err => {
-                console.log("error",err)
+                console.log("error", err)
             })
 
     }
     return (
         <div>
             <div>
+                
                 <h1>Create Posts</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -53,6 +68,9 @@ function New() {
                         <label>Content</label>
                         <input name="content" value={post.content} onChange={handleInputChange} />
 
+                    </div>
+                    <div>
+                        <input type="file" name="images" onChange={handleInputChange} />
                     </div>
                     <button>Submit</button>
 
