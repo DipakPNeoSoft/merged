@@ -13,8 +13,8 @@ function Edit() {
         axios.get(`http://localhost:3001/api/v1/posts/${id}`,{ headers: 
         { Authorization: `${localStorage.getItem('token')}` 
         }}).then(res=> {
-               
-            setData(res.data)
+            console.log("response",res) 
+            setData(res.data.post)
         })
         .catch((err)=>{
             if(err.response.status === 404){
@@ -32,7 +32,7 @@ function Edit() {
 
     const updatePost =(event)=>{
         event.preventDefault();
-        axios.patch(`http://localhost:3002/api/v1/posts/${id}`,{post},{ headers: 
+        axios.patch(`http://localhost:3001/api/v1/posts/${id}`,{post},{ headers: 
         { Authorization: `${localStorage.getItem('token')}` 
         }}).then(res=> {
                 console.log(res)

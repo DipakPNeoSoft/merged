@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../new.css'
+
 
 import { useNavigate } from 'react-router-dom';
 
@@ -56,28 +59,63 @@ function New() {
     }
     return (
         <div>
-            <div>
+            <div className='form-outline w-50 container-fluid'>
                 
-                <h1>Create Posts</h1>
+                <h1>Share Your Thought</h1>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>title</label>
-                        <input name="title" value={post.title} onChange={handleInputChange} />
+                    <div className="form-outline mb-4" style={{'width':'60%'}}>
+                        <label className="form-label">Title:</label>   
+                        <input className="form-control" name="title" value={post.title} onChange={handleInputChange} />
                     </div>
-                    <div>
+                    <div  className="form-outline mb-4" >
                         <label>Content</label>
-                        <input name="content" value={post.content} onChange={handleInputChange} />
+                        <textarea  rows="4" className="form-control" name="content" value={post.content} onChange={handleInputChange} />
 
                     </div>
-                    <div>
+                    <div  className="form-outline mb-4" >
                         <input type="file" name="images" onChange={handleInputChange} />
                     </div>
-                    <button>Submit</button>
+                    <div  className="form-outline mb-4" >
+                        <button className='btn btn-success'>Share</button>
+
+                    </div>
 
 
                 </form>
 
+
             </div>
+            {/* <div className="form-outline w-50 container-fluid">
+                <form onSubmit={handleSubmit}>
+               
+
+                    <div className="form-outline mb-4" style={{'width':'60%'}}>
+                        <label className="form-label">Title:</label>
+
+                        <input  id="form4Example2" name="title" className="form-control"  value={post.title} onChange={handleInputChange}/>
+                    </div>
+
+                    <div className="form-outline mb-4">
+                        <label className="form-label" >Content:</label>
+
+                        <textarea className="form-control" rows="4"  name="content" value={post.content} onChange={handleInputChange} ></textarea>
+                    </div>
+                    <div className="upload-btn-wrapper">
+                        <button className="btn" id='btn'>Upload a file</button>
+                        <input type="file" name="images"  />
+                    </div>
+
+                    <div className="form-outline mb-4">
+                        <button type="submit" className="btn btn-primary btn-block mb-4">
+                        Share
+                        </button>
+                    </div>
+                    
+                </form>
+            
+                
+            </div> */}
+        
         </div>
     )
 }

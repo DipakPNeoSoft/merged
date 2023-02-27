@@ -6,12 +6,14 @@ import New from './components/New';
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import Edit from './components/Edit';
 import Registration from './components/Registration';
+import Navabar from './components/Navabar';
 
 function App() {
   return (
     
 
     <BrowserRouter> 
+      <Navabar/>
 
       <Routes>
         <Route path="/new" element={<New/>} />
@@ -28,6 +30,7 @@ function App() {
      
      
     </BrowserRouter>
+    
     
       
    
