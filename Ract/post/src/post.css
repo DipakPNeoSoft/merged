@@ -1,8 +1,17 @@
 p div{
-    align-items: center;
+    /* align-items: center; */
     color: blueviolet;
 }
 
-h2 h5 {
+h2:hover, h6:hover {
+    /* background-color: yellow; */
+    color: brown;
+    
     
 }
+
+#card:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    transform: scale(1.1);
+}
+

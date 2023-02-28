@@ -33,43 +33,30 @@ function Post() {
 
     }, [])
 
-    const deletePost = (e) => {
+   
 
-        axios.delete(`http://localhost:3002/api/v1/posts/${e.target.id}`, {
-            headers:
-            {
-                Authorization: `${localStorage.getItem('token')}`
-            }
-        })
-            .then(res => {
-                setData(res.data)
+    // const handleLogout = () => {
+    //     axios.delete(`http://localhost:3002//users/sign_out`, {
+    //         headers:
+    //         {
+    //             Authorization: `${localStorage.getItem('token')}`
+    //         }
+    //     })
+    //         .then(res => {
+    //             debugger
+    //             if (res.status === 200) {
+    //                 localStorage.clear();
+    //                 navigate('/')
+    //             }
+    //             setData(res.data)
 
-            })
-            .catch("error occured")
-    }
-
-    const handleLogout = () => {
-        axios.delete(`http://localhost:3002//users/sign_out`, {
-            headers:
-            {
-                Authorization: `${localStorage.getItem('token')}`
-            }
-        })
-            .then(res => {
-                debugger
-                if (res.status === 200) {
-                    localStorage.clear();
-                    navigate('/')
-                }
-                setData(res.data)
-
-            })
-            .catch((err) => {
-                console.log("error ", err)
-            })
+    //         })
+    //         .catch((err) => {
+    //             console.log("error ", err)
+    //         })
 
 
-    }
+    // }
 
 
 
@@ -77,43 +64,50 @@ function Post() {
 
     return (
 
-        <div>
+        <div id='post_body'>
 
-
-
+            
             <div>
                 {
                     posts.map(post =>
 
 
-                        <div key={post.id} >
-                            <div class="container px-4 px-lg-5">
-                                <div class="row gx-4 gx-lg-5 justify-content-center">
-                                    <div class="col-md-10 col-lg-8 col-xl-7">
-                                        <div class="post-preview">
-                                            <h2 class="post-title">{post.title}</h2>
-                                            <h5 class="post-subtitle">{post.content}</h5>
-                                            <div class="d-flex justify-content-end mb-4"><Link to={`/posts/${post.id}`} className='btn btn-info' id={post.id} >Show →</Link></div>
+                        <div key={post.id} className='m-2' >
+                            <div className="container px-2 px-lg-2">
+                                <div className="row gx-2 gx-lg-3 justify-content-center">
+                                    <div className="col-md-10 col-lg-8 col-xl-7" id='card'>
+                                        <div className="post-preview">
+                                            <h2 className="post-title">
+                                                <b>{post.title}</b>
+                                            </h2>
+                                            <h6 className="post-subtitle">{post.content.split(" ").slice(0, 20).join(" ") + " ..."}</h6>
+                                            <div className="d-flex justify-content-end mb-4"><Link to={`/posts/${post.id}`} className='btn btn-info' id={post.id} >Show →</Link></div>
 
-                                            <p class="post-meta">
+                                            <p className="post-meta">
+                                                <i>
                                                 Posted on {post.created_at}
+
+                                                </i>
 
                                             </p>
                                         </div>
-                                        <hr class="my-4" />
+                                        <hr className="my-4" />
 
                                     </div>
                                 </div>
                             </div>
+                            
 
-                            {/* <p >{post.title}</p>
-            <span><Link to={`/posts/${post.id}`} className='btn btn-info' id={post.id} >Show</Link></span>
-            <span><button  className='btn btn-danger' id={post.id}  onClick={deletePost}>Delete</button></span>
-            <span><Link to={`/posts/${post.id}/edit`} className='btn btn-info' id={post.id} >Edit</Link></span> */}
+                            
 
 
+                        <br />
+                        <br />
 
-                        </div>)
+                        </div>
+                     
+                       
+                        )
                 }
             </div>
 

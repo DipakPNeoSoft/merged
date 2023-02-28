@@ -7,6 +7,7 @@ import { Routes, BrowserRouter, Route } from "react-router-dom";
 import Edit from './components/Edit';
 import Registration from './components/Registration';
 import Navabar from './components/Navabar';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
@@ -14,9 +15,14 @@ function App() {
 
     <BrowserRouter> 
       <Navabar/>
+     
+      
+
 
       <Routes>
         <Route path="/new" element={<New/>} />
+        <Route path="/sidebar" element={<Sidebar/>} />
+
 
         <Route path="/posts/:id" element={<Show/>} />
         <Route exac path="/posts/:id/edit" element={<Edit/>} />
