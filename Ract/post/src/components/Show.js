@@ -82,15 +82,16 @@ function Show() {
                                         ))}
                                     </div>
                                 </div>
-                                
+                                {author && (
                                 <div>
-                                    <span>
-                                        <button className='btn btn-danger' id={post.id} onClick={deletePost}>Delete</button>
+                                  
+                                    <button className='btn btn-danger' id={post.id} onClick={deletePost} style={{ marginBottom: '10px'}}>Delete</button>
+                            
 
-                                    </span>
-                                    <span><Link to={`/posts/${post.id}/edit`} className='btn btn-info' id={post.id} >Edit</Link></span>
+                                 
+                                    <Link to={`/posts/${post.id}/edit`} className='btn btn-info' id={post.id} style={{ marginLeft: '10px' ,marginBottom: '10px'}}>Edit</Link>
 
-                                </div>
+                                </div>)}
                                 
 
                             </div>

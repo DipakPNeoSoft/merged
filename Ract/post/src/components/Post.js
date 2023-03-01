@@ -35,28 +35,7 @@ function Post() {
 
    
 
-    // const handleLogout = () => {
-    //     axios.delete(`http://localhost:3002//users/sign_out`, {
-    //         headers:
-    //         {
-    //             Authorization: `${localStorage.getItem('token')}`
-    //         }
-    //     })
-    //         .then(res => {
-    //             debugger
-    //             if (res.status === 200) {
-    //                 localStorage.clear();
-    //                 navigate('/')
-    //             }
-    //             setData(res.data)
-
-    //         })
-    //         .catch((err) => {
-    //             console.log("error ", err)
-    //         })
-
-
-    // }
+   
 
 
 

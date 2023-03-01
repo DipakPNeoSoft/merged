@@ -3,13 +3,19 @@ import React, { useState } from 'react'
 import '../login.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { UserContext } from "../App";
+
+
 
 
 function Login() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
+  
 
+  const { setUserId } = useContext(UserContext);
   
 
   const changeHandler=(event)=>{
@@ -22,6 +28,7 @@ function Login() {
 
 
   const submitHandler = (e) => {
+    debugger
     
     e.preventDefault()
   
@@ -38,6 +45,8 @@ function Login() {
           
           let token = response.headers.get('Authorization')
           localStorage.setItem('token', token);
+          localStorage.setItem('userId', response.data.user.id);
+          setUserId(localStorage.getItem('userId'));
           navigate('/posts')
 
 
