@@ -9,7 +9,7 @@ function Registration() {
     const navigate = useNavigate();
 
     const [user,setUser] = useState({email: '',password: ''})
-    const [errors,setError] = useState([])
+    const [error,setError] = useState([])
 
     const changeInputHandler=(event)=>{
         console.log("first")
@@ -31,9 +31,11 @@ function Registration() {
     
     
             if (response.status === 200) {
-              
+              console.log("user",response.data.user.id)
               let token = response.headers.get('Authorization')
               localStorage.setItem('token', token);
+              localStorage.setItem('userId', response.data.user.id);
+
               navigate('/posts')
     
     
@@ -42,10 +44,11 @@ function Registration() {
             }
           })
           .catch(err => {
+            console.log("status",err.response.data.errors.email)
           
-            console.log("error",err.response.data)
+            console.log("status",err.response.status)
     
-            setError(err.response.data)
+            setError(err.response.data.errors.email)
               
           })
     
@@ -64,7 +67,7 @@ function Registration() {
                                 <div className="card-title text-center border-bottom">
                                     <h2 className="p-3">Register</h2>
                                 </div>
-                                <ul>{errors.map((err)=><li key={err} style={{color: 'red'}}>{err}</li>)}</ul>
+                                {/* <ul>{errors.map((err)=><li key={err} style={{color: 'red'}}>{err}</li>)}</ul> */}
                                 <div className="card-body">
                                     <form onSubmit={submitHandler} >
                                         <div className="mb-4">
@@ -84,6 +87,7 @@ function Registration() {
                                             <button type="submit" className="btn btn-primary">Register</button>
                                         </div>
                                     </form>
+                                    <li style={{color: 'red'}}>{error}</li>
                                     {/* <span>{error}</span> */}
                                     <div className="mb-4">
                                         <Link to={'/'}>Login</Link>
